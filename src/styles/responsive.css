@@ -1,0 +1,113 @@
+@media screen and (min-width: 568px) {
+    .restaurant__menu__wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    .app-bar .app-bar__brand h1 {
+        font-size: 1.5em;
+    }
+
+    .app-bar .app-bar__menu {
+        display: none;
+    }
+
+    .app-bar .app-bar__navigation {
+        all: unset;
+    }
+
+    .app-bar .app-bar__navigation ul {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .app-bar .app-bar__navigation ul li a {
+        padding: 20px 10px;
+        font-size: .9em;
+    }
+
+    .restaurants {
+        grid-template-columns: 1fr 1fr;
+        padding: 0 30px 50px;
+    }
+
+    .restaurant {
+        padding: 0 50px;
+    }
+
+    .restaurant__title {
+        margin-top: 30px;
+    }
+
+    .restaurant__thumbnail {
+        height: 200px;
+    }
+
+    .restaurant__add__review, .restaurant__review {
+        padding: 0 50px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .app-bar .app-bar__brand h1 {
+        font-size: 2em;
+    }
+
+    .hero__inner {
+        text-align: left;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .restaurants {
+        grid-template-columns: 1fr 1fr 1fr;
+        padding: 0 30px 50px;
+    }
+
+    .restaurant {
+        padding: 0 100px;
+        gap: 30px;
+    }
+
+    .restaurant__detail {
+        flex-direction: row;
+    }
+
+    .restaurant__detail__thumbnail {
+        width: 50%;
+    }
+
+    .restaurant__detail__info {
+        text-align: left;
+    }
+
+    .restaurant__detail__info h3 {
+        text-align: left;
+    }
+
+    .restaurant__reviews {
+        display: flex;
+    }
+
+    .restaurant__add__review {
+        width: 100%;
+    }
+
+    .restaurant__review {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .restaurants {
+        padding: 0 100px 50px;
+    }
+
+    .restaurant__thumbnail{
+        height: 230px;
+    }
+}
