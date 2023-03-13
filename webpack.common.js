@@ -1,13 +1,12 @@
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
-import path from 'path';
-import CONFIG from './src/scripts/global/config.js';
-import {fileURLToPath} from 'url';
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+const path = require('path');
+const ImageminWebpackPlugin = require('imagemin-webpack-plugin').default;
+const ImageminMozjpeg = require('imagemin-mozjpeg');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-export default {
+module.exports = {
   entry: {
     app: path.resolve(__dirname, 'src/scripts/index.js'),
   },
@@ -31,6 +30,29 @@ export default {
       },
     ],
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 20000,
+      maxSize: 70000,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      automaticNameDelimiter: '~',
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -39,8 +61,11 @@ export default {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, 'src/public/'),
-          to: path.resolve(__dirname, 'dist/'),
+          from: path.resolve(__dirname, 'src/public'),
+          to: path.resolve(__dirname, 'dist'),
+          globOptions: {
+            ignore: ['**/images/**'],
+          },
         },
       ],
     }),
@@ -48,18 +73,27 @@ export default {
       swDest: './sw.bundle.js',
       runtimeCaching: [
         {
-          urlPattern: new RegExp(CONFIG.BASE_URL),
-          handler: 'NetworkFirst',
+          urlPattern: /https:\/\/restaurant-api.dicoding.dev/,
+          handler: 'StaleWhileRevalidate',
           options: {
-            cacheName: CONFIG.API_CACHE_NAME,
+            cacheName: 'api-cache',
             expiration: {
               maxEntries: 100,
-              maxAgeSeconds: 24 * 60 * 60,
+              maxAgeSeconds: 72 * 60 * 60,
             },
             cacheableResponse: {statuses: [0, 200]},
           },
         },
       ],
     }),
+    new ImageminWebpackPlugin({
+      plugins: [
+        ImageminMozjpeg({
+          quality: 50,
+          progressive: true,
+        }),
+      ],
+    }),
+    new BundleAnalyzerPlugin(),
   ],
 };

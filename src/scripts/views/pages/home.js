@@ -5,6 +5,10 @@ const Home = {
   async render() {
     return `
       <div class="hero">
+        <picture>
+          <source media="(max-width: 600px)" srcset="./images/hero-image_4-small.jpg">
+          <img src='./images/hero-image_4-large.jpg' alt="hero image">
+        </picture>
         <div class="hero__inner">
           <h2 class="hero__title">Find the Best Bites in Town</h2>
           <p class="hero__tagline">

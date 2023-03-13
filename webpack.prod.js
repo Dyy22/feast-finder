@@ -1,7 +1,7 @@
-import common from './webpack.common.js';
-import {merge} from 'webpack-merge';
+const common = require('./webpack.common.js');
+const {merge} = require('webpack-merge');
 
-export default merge(common, {
+module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
   module: {

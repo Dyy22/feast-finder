@@ -1,7 +1,8 @@
 import DicodingRestaurantSource from '../../data/dicoding-restaurant-source.js';
 import UrlParser from '../../routes/url-parser.js';
 import RestaurantReviewInitiator from '../../utils/submit-review-initiator.js';
-import LikeButtonInitiator from '../../utils/like-button-initiator.js';
+import LikeButtonPresenter from '../../utils/like-button-presenter.js';
+import FavoriteRestaurantIdb from '../../data/favorite-restaurant-idb';
 import {
   createRestaurantDetailTemplate,
   createRestaurantMenuTemplate,
@@ -38,8 +39,9 @@ const Detail = {
       restaurant,
     });
 
-    await LikeButtonInitiator.init({
+    await LikeButtonPresenter.init({
       likeButtonContainer,
+      favoriteRestaurants: FavoriteRestaurantIdb,
       restaurant,
     });
 
