@@ -1,6 +1,3 @@
-const Dotenv = require('dotenv-webpack');
-const path = require('path');
-
 module.exports = (config) => {
   config.set({
 
@@ -32,13 +29,6 @@ module.exports = (config) => {
       // webpack configuration
       devtool: 'inline-source-map',
       mode: 'development',
-      plugins: [
-        new Dotenv({
-          path: path.resolve(__dirname, '.env'),
-          systemvars: true,
-          safe: true,
-        }),
-      ],
     },
 
     webpackMiddleware: {
