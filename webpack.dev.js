@@ -1,12 +1,9 @@
-import path from 'path';
-import common from './webpack.common.js';
-import {merge} from 'webpack-merge';
-import {fileURLToPath} from 'url';
-import {CleanWebpackPlugin} from 'clean-webpack-plugin';
+const path = require('path');
+const common = require('./webpack.common.js');
+const {merge} = require('webpack-merge');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-export default merge(common, {
+module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {

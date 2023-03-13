@@ -7,9 +7,9 @@ const createRestaurantItemTemplate = (restaurant) => `
       ${restaurant.city}
     </figcaption>
     <img 
-      src="${apiEndpoint.PICTURE(Constant.SMALL, restaurant.pictureId)}" 
+      data-src="${apiEndpoint.PICTURE(Constant.SMALL, restaurant.pictureId)}" 
       alt="${restaurant.name}" 
-      class="restaurant__thumbnail"
+      class="restaurant__thumbnail lazyload"
     >
     <p class="restaurant__thumbnail__rating">⭐ ${restaurant.rating}</p>
   </figure>
@@ -101,14 +101,14 @@ const createRestaurantAddReviewTemplate = () => `
   </form>
 `;
 
-const createLikeButtonTemplate = () => `
-  <button aria-label="like this movie" id="likeButton" class="like">
+const createLikeMovieButtonTemplate = () => `
+  <button aria-label="like this restaurant" id="likeButton" class="like">
      <i class="fa fa-heart-o" aria-hidden="true"></i>
   </button>
 `;
 
-const createLikedButtonTemplate = () => `
-  <button aria-label="unlike this movie" id="likeButton" class="like">
+const createUnlikeMovieButtonTemplate = () => `
+  <button aria-label="unlike this restaurant" id="likeButton" class="like">
     <i class="fa fa-heart" aria-hidden="true"></i>
   </button>
 `;
@@ -119,6 +119,6 @@ export {
   createRestaurantMenuTemplate,
   createRestaurantReviewTemplate,
   createRestaurantAddReviewTemplate,
-  createLikeButtonTemplate,
-  createLikedButtonTemplate,
+  createLikeMovieButtonTemplate,
+  createUnlikeMovieButtonTemplate,
 };
